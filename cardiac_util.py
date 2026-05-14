@@ -100,6 +100,13 @@ class CardioCareAI:
             # Fallback to local environment variable
             api_key_value = os.environ.get("GROQ_API_KEY")
 
+        if not api_key_value:
+            raise ValueError(
+                "API Key is missing! You need to add it to your Streamlit Cloud Secrets. "
+                "Go to your Streamlit Dashboard -> App Settings -> Secrets, and add:\n"
+                'GROQ_API_KEY = "your_actual_api_key_here"'
+            )
+
         self.llm = ChatGroq(
             api_key=api_key_value,
             model="llama-3.1-8b-instant",
