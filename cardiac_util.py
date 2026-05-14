@@ -90,9 +90,15 @@ class MedicalAdvice(BaseModel):
 class CardioCareAI:
     def __init__(self):
         """
-        Initialize with Groq API key from environment variables.
+        Initialize with Groq API key from Streamlit secrets or environment variables.
         """
-        api_key_value = os.environ.get("GROQ_API_KEY")
+        import streamlit as st
+        try:
+            # Check Streamlit secrets first (used in Streamlit Cloud)
+            api_key_value = st.secrets["GROQ_API_KEY"]
+        except Exception:
+            # Fallback to local environment variable
+            api_key_value = os.environ.get("GROQ_API_KEY")
 
         self.llm = ChatGroq(
             api_key=api_key_value,
