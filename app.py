@@ -151,7 +151,7 @@ if 'risk_assessment' not in st.session_state:
 
 # Initialize AI Engine securely
 @st.cache_resource
-def get_ai_engine(_cache_buster=4):
+def get_ai_engine(_cache_buster=5):
     try:
         return CardioCareAI()
     except Exception as e:
